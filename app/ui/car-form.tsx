@@ -12,6 +12,7 @@ interface CarFormProps {
   setSelectedMake: (make: string) => void;
   setSelectedModel: (model: string) => void;
   setSelectedYear: (year: string) => void;
+  setError: (error: string) => void;
 }
 
 const CarForm = ({
@@ -24,6 +25,7 @@ const CarForm = ({
   setSelectedMake,
   setSelectedModel,
   setSelectedYear,
+  setError,
 }: CarFormProps) => {
   const [makes, setMakes] = useState<string[]>([]);
   const [innerLoading, setInnerLoading] = useState(false);
@@ -81,6 +83,7 @@ const CarForm = ({
       setImgUrl(result.data.carImg);
     } catch (error) {
       console.error('Fetching reviews failed:', error);
+      setError('Failed to fetch reviews. Please try again.');
     } finally {
       setLoading(false);
     }
